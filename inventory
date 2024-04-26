@@ -1,3 +1,6 @@
+[file_servers]
 host_server_1
 host_server_2
+
+[db_servers]
 host_server_3

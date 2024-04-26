@@ -1,0 +1,13 @@
+- hosts: db_servers
+  become: true
+  tasks:
+    - name: "install maria_db"
+      tags: maria
+      dnf:
+        update_cache: yes
+        name:
+          - mariadb
+          - samba
+          - httpd
+        state: latest
+      when: ansible_distribution == "OracleLinux"

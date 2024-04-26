@@ -1,0 +1,40 @@
+---
+
+
+- hosts: all
+  become: true
+  tasks:
+    - name: "install samba package"
+      apt:
+        update_cache: yes
+        name:
+          - samba
+          - apache2
+          - libapache2-mod-php
+        state: latest
+      when: ansible_distribution == "Ubuntu"
+
+    - name: "install tilix package"
+      tags: tmf
+      apt:
+        update_cache: yes
+        name:
+          - tilix
+          - cmatrix
+          - mutt
+        state: latest
+      when: ansible_distribution == "Ubuntu"
+
+- hosts: db_servers
+  become: true
+  tasks:
+    - name: "install maria_db"
+      tags: maria
+      dnf:
+        update_cache: yes
+        name:
+          - mariadb
+          - samba
+          - httpd
+        state: latest
+      when: ansible_distribution == "OracleLinux"
